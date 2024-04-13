@@ -1,0 +1,581 @@
+\documentclass[11pt]{beamer}
+\usepackage[UTF8,scheme=plain]{ctex}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+
+\usepackage{framed} % 可以用 \begin{shaded}，即背景色块
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+
+\newcommand{\kong}[1][0.5]{\vspace{#1cm}}
+
+\begin{document}
+	\author{ 路毅 \hspace{0.3cm} 曲阜师范大学 }
+	\date{\number\year 年 \number\month 月 \number\day 日}
+	\title{贝塞尔函数　柱函数}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\kaishu
+
+\begin{frame}{贝塞尔函数　柱函数}
+\begin{itemize}
+	\item {\color{blue}第一节：贝塞尔函数的母函数与递推式}
+	\vspace{1cm}
+	\item 第二节：贝塞尔方程，贝塞尔函数作为正交函数系
+	\vspace{1cm}
+	\item 第三节：球贝塞尔函数
+	\vspace{1cm}
+	\item 第四节：第二类和第三类贝塞尔函数，渐进行为
+\end{itemize}
+\end{frame}
+
+\begin{frame}{伽马函数}
+为了后面叙述的方便，我们在这里简单介绍伽马函数。
+\begin{equation}
+\Gamma(x) = \int^\infty_0 e^{-t} t^{x-1} dt, x>0.
+\end{equation}
+容易求得
+\begin{eqnarray}
+\Gamma(1) &=& \int^\infty_0 e^{-t} dt = 1, \\
+\Gamma(\frac{1}{2}) &=& \int^\infty_0 e^{-t} t^{-1/2} dt
+= \int^\infty_0 e^{-\omega^2} 2 d \omega = \sqrt{\pi}.
+\end{eqnarray}
+根据定义式，做一次分部积分，可以推得$x>1$时的递推式
+\begin{eqnarray}
+\Gamma(x) &=& \int^\infty_0 e^{-t}t^{x-1} dt 
+= - e^t t^{x-1} |^\infty_0 + (x-1)\int^\infty_0 e^{-t} t^{x-2} dt \nonumber\\
+&=& (x-1) \Gamma(x-1).
+\end{eqnarray}
+
+\end{frame}
+
+\begin{frame}{伽马函数}
+所以，总结上面的结果，可以得到
+\begin{eqnarray}
+\Gamma(n+1) &=& n!, ~~~~ n = 0,1,2,\cdots, \\
+\Gamma(n+\frac{1}{2}) &=& \frac{(2n)!}{2^{2n} n!} \sqrt{\pi}, ~~~~ n = 0,1,2,\cdots.
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{贝塞尔函数的母函数}
+贝塞尔函数的母函数为
+\begin{equation}
+G(x,z) = e^{\frac{x}{2}(z-\frac{1}{z})} = \sum^\infty_{n=-\infty} J_n(x) z^n,
+\end{equation}
+其中$J_n(x)$即贝塞尔函数, $x \in R$。因为母函数在$z=0$并不解析，但在$0<|z|<\infty$是解析的，所以可做洛朗展开，既有负幂次项，也有非负幂次项。
+
+利用$e$指数函数的泰勒展开式，很容易写出$G(x,z)$的洛朗展开式，
+\begin{equation}
+G(x,z) = e^{\frac{xz}{2}} e^{-\frac{x}{2z}}
+= \sum^\infty_{r=0} (\frac{x}{2})^r \frac{z^r}{r!}
+\sum^\infty_{s=0} (-\frac{x}{2})^s \frac{z^{-s}}{s!},
+\end{equation}
+上式为两个级数相乘，进行重排，可以得到贝塞尔函数，$n \geq 0$时有
+\begin{eqnarray}
+J_n(x) &=& \sum^\infty_{s=0} \frac{(-1)^s}{s!(n+s)!}(\frac{x}{2})^{n+2s}, \\
+J_{-n}(x) &=& \sum^\infty_{r=0}
+\frac{(-1)^{n+r}}{r!(n+r)!}(\frac{x}{2})^{n+2r}
+=\sum^\infty_{s=0} \frac{(-1)^s}{s!(-n+s)!}(\frac{x}{2})^{-n+2s}.
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{贝塞尔函数}
+可以看到$J_{-n}(x)$与$J_n(x)$的形式一致，且有
+\begin{equation}
+J_{-n}(x) = (-1)^n J_n(x).
+\end{equation}
+如果把阶乘形式推广到$\Gamma$函数，即$n! = \Gamma(n+1)$，则$J_n(x)$可以写作
+\begin{equation}
+J_n(x) = \sum^\infty_{s=0} \frac{(-1)^s}{s!\Gamma(n+s+1)} (\frac{x}{2})^{n+2s}.
+\end{equation}
+因为$\Gamma$函数在正实轴上都有定义，所以这个形式可以推广到任意实数阶贝塞尔函数$J_\nu$，
+\begin{equation}
+J_\nu(x) = \sum^\infty_{s=0} \frac{(-1)^s}{s!\Gamma(\nu+s+1)} (\frac{x}{2})^{\nu+2s}.
+\end{equation}
+当然，$G(x,z)$的洛朗展开只有整数阶的幂次，所以$J_\nu$只是$J_n$的推广，与$G(x,z)$没有直接关系。
+\end{frame}
+
+\begin{frame}{递推公式}
+从母函数出发，可以推出$J_n$的递推公式，但是不能直接用到$J_\nu$，毕竟$J_\nu$与母函数没有直接关系。
+所以，我们采用教材上的思路，从级数表达式出发，推导递推公式，因为$J_n, J_\nu$都有统一的级数表达式，所以这样推出的递推公式也是普适的。
+因为
+\begin{equation}
+J_\nu(x) = \sum^\infty_{k=0} \frac{(-1)^k}{k!\Gamma(\nu+k+1)} (\frac{x}{2})^{\nu+2k}.
+\end{equation}
+所以有
+\begin{eqnarray}
+\frac{d}{dx}[ x^\nu J_\nu (x) ] &=& \frac{d}{dx}[ 2^\nu \sum^\infty_{k=0} \frac{(-1)^k}{k!\Gamma(\nu+k+1)} (\frac{x}{2})^{2\nu+2k} ] \nonumber\\
+&=& 2^\nu \sum^\infty_{k=0} \frac{(-1)^k (k+\nu)}{k!\Gamma(\nu+k+1)} (\frac{x}{2})^{2\nu+2k-1}  \nonumber\\
+&=& x^\nu \sum^\infty_{k=0} \frac{(-1)^k }{k!\Gamma(\nu+k)} (\frac{x}{2})^{\nu-1+2k}
+= x^\nu J_{\nu-1}(x),
+\end{eqnarray}
+
+\end{frame}
+
+\begin{frame}{递推公式}
+类似地，可以证明
+\begin{equation}
+\frac{d}{dx}[ x^{-\nu} J_\nu(x) ] = - x^{-\nu} J_{\nu+1}(x).
+\end{equation}
+上面得到的两个式子即
+\begin{eqnarray}
+\nu J_\nu + xJ'_\nu &=& x J_{\nu-1}, \\
+- \nu J_\nu + x J'_\nu &=& - x J_{\nu+1}.
+\end{eqnarray}
+分别消去$J'_\nu$和$J_\nu$，得到两个基本递推式
+\begin{eqnarray}
+J_{\nu-1} + J_{\nu+1} &=& \frac{2\nu}{x} J_\nu, 
+\label{eqn:Bessel-recursion1}
+\\
+J_{\nu-1} - J_{\nu+1} &=& 2 J'_\nu.
+\label{eqn:Bessel-resursion2}
+\end{eqnarray}
+注意特殊情况：
+在$\nu = 0$时，有
+\begin{equation}
+J'_0 (x) = - J_1(x).
+\end{equation}
+\end{frame}
+
+\begin{frame}{递推公式总结}
+
+\begin{eqnarray}
+\nu J_\nu + xJ'_\nu &=& x J_{\nu-1}, \\
+- \nu J_\nu + x J'_\nu &=& - x J_{\nu+1}, \\
+J_{\nu-1} + J_{\nu+1} &=& \frac{2\nu}{x} J_\nu, 
+\\
+J_{\nu-1} - J_{\nu+1} &=& 2 J'_\nu.
+\end{eqnarray}
+
+\end{frame}
+
+\begin{frame}{半奇数阶贝塞尔函数}
+利用定义，可以得到
+\begin{eqnarray}
+J_{\frac{1}{2}}(x) &=& (\frac{x}{2})^{\frac{1}{2}} \sum^\infty_{k=0} \frac{ (-1)^k }{ k! \Gamma(\frac{3}{2}+k) } (\frac{x}{2})^{2k}
+ \nonumber\\
+ &=& (\frac{x}{2})^{\frac{1}{2}} 
+ \sum^\infty_{k=0} \frac{ (-1)^k　2^{2k+2} (k+1)! }{ k! (2k+2)! \sqrt{\pi} } (\frac{x}{2})^{2k}
+ \nonumber\\
+ &=& \sqrt{\frac{2}{\pi x}} \sum^\infty_{k=0} \frac{(-1)^k}{(2k+1)!}x^{2k+1} = \sqrt{\frac{2}{\pi x}} \sin x.
+\end{eqnarray}
+\begin{eqnarray}
+J_{-\frac{1}{2}}(x) &=& \sum^\infty_{k=0} \frac{(-1)^k}{k! \Gamma(k+\frac{1}{2})} (\frac{x}{2})^{-\frac{1}{2}+2k}
+ = \sum^\infty_{k=0} \frac{(-1)^k 2^{2k} k! }{k! (2k)! \sqrt{\pi} } (\frac{x}{2})^{-\frac{1}{2}+2k}
+ \nonumber\\
+ &=& \sqrt{\frac{2}{\pi x}} \sum^\infty_{k=0} \frac{(-1)^k}{(2k)!}x^{2k} = \sqrt{\frac{2}{\pi x}}\cos x.
+\end{eqnarray}
+结合前面的递推式，可以得知，所有半奇数阶的贝塞尔函数都可以写成初等函数形式。
+\end{frame}
+
+
+\begin{frame}{积分形式}
+根据母函数
+\begin{equation}
+G(x,z) = e^{\frac{x}{2}(z-\frac{1}{z})} = \sum^\infty_{n=-\infty} J_n(x) z^n.
+\end{equation}
+以及洛朗展开公式
+\begin{equation}
+f(z) = \sum^\infty_{n=-\infty} c_n (z-a)^n, ~~
+c_n = \frac{1}{2\pi i} \oint_\gamma \frac{f(\zeta)}{(\zeta-a)^{n+1}} d\zeta, n\in Z,
+\end{equation}
+$\gamma$为以$z=a$为圆心的收敛圆环内，且包围$z=a$点。
+
+我们可以写出$J_n(x)$的柯西积分形式
+\begin{equation}
+J_n(x) = \frac{1}{2\pi i} \oint_C \frac{e^{\frac{x}{2}(\zeta-\frac{1}{\zeta})}}{\zeta^{n+1}} d\zeta,
+\end{equation}
+$C$为围绕$z=0$的任意曲线。
+
+\end{frame}
+
+\begin{frame}{积分形式}
+不妨取$C$为单位圆，$\zeta = e^{i\theta}, \theta \in [-\pi, \pi]$，则有
+\begin{eqnarray}
+J_n(x) &=& \frac{1}{2\pi i} \int^\pi_{-\pi} e^{-i(n+1)\theta} e^{ix\sin\theta} ie^{i\theta} d\theta
+\nonumber\\
+&=& \frac{1}{2\pi} \int^\pi_{-\pi} e^{i(x\sin\theta - n\theta)} d \theta
+\nonumber\\
+&=& \frac{1}{2\pi} \int^\pi_{-\pi} \cos( x\sin\theta - n \theta ) d \theta.
+\end{eqnarray}
+更一般地，有
+\begin{eqnarray}
+J_\nu(x) &=& \frac{(\frac{x}{2})^\nu}{\Gamma(\frac{1}{2}) \Gamma(\nu+\frac{1}{2})}
+\int^\pi_0 \cos(x\cos \theta) \sin^{2\nu} \theta d\theta, (Re \nu > - \frac{1}{2})
+\nonumber\\
+&=& \frac{1}{2\pi} \int^\pi_{-\pi} \cos( x \sin \theta - \nu \theta ) d\theta
+-
+\frac{\sin \nu \pi}{\pi} \int^\infty_0 e^{-x\sinh \zeta - \nu \zeta} d\zeta.
+\nonumber\\
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{贝塞尔函数　柱函数}
+\begin{itemize}
+	\item {第一节：贝塞尔函数的母函数与递推式}
+	\vspace{1cm}
+	\item {\color{blue}第二节：贝塞尔方程，贝塞尔函数作为正交函数系}
+	\vspace{1cm}
+	\item 第三节：球贝塞尔函数
+	\vspace{1cm}
+	\item 第四节：第二类和第三类贝塞尔函数，渐进行为
+\end{itemize}
+\end{frame}
+
+\begin{frame}{贝塞尔方程}
+利用上面推导的递推式，可以推导出贝塞尔方程，根据(\ref{eqn:Bessel-recursion1}-\ref{eqn:Bessel-resursion2})，有
+\begin{eqnarray}
+4 J''_\nu &=& 2J'_{\nu-1} - 2J'_{\nu+1}
+= J_{\nu-2} - J_\nu - ( J_\nu - J_{\nu+2} )
+\nonumber\\
+&=& J_{\nu-2}(x) + J_{\nu+2} - 2 J_\nu
+\nonumber\\
+&=& \frac{2(\nu-1)}{x} J_{\nu-1} - J_\nu + \frac{2(\nu+1)}{x}J_{\nu+1} - J_\nu - 2 J_\nu
+\nonumber\\
+&=& \frac{2}{x}[n(J_{\nu-1} + J_{\nu+1}) + J_{\nu+1} - J_{\nu-1} ] - 4 J_\nu
+\nonumber\\
+&=& \frac{2}{x}[ \nu \frac{2\nu}{x} J_\nu - 2 J'_\nu ] - 4 J_\nu,
+\end{eqnarray}
+即
+\begin{equation}
+x^2 J''_\nu(x) + x J'_\nu(x) + (x^2 - \nu^2) J_\nu(x) = 0.
+\end{equation}
+这就是贝塞尔方程。
+\end{frame}
+
+\begin{frame}{正交性}
+$\nu$阶贝塞尔方程可写作
+\begin{equation}
+x \frac{d^2}{dx^2}J_\nu(x) + \frac{d}{dx}J_\nu(x) + (x - \nu^2/x) J_\nu(x) = 0.
+\end{equation}
+做替换　$x \rightarrow kx, \frac{d}{dx} \rightarrow \frac{d}{d(kx)} = \frac{1}{k}\frac{d}{dx}$，则方程变为
+\begin{equation}
+kx \frac{1}{k^2}\frac{d^2}{dx^2} J_\nu(kx) + \frac{1}{k}\frac{d}{dx}J_\nu(kx) + (kx - \frac{\nu^2}{kx}) J_\nu(kx) = 0.
+\end{equation}
+即
+\begin{equation}
+x \frac{d^2}{dx^2}J_\nu(kx) + \frac{d}{dx}J_\nu(kx) + (k^2x - \nu^2/x) J_\nu(kx) = 0.
+\end{equation}
+\end{frame}
+
+\begin{frame}{正交性}
+
+\begin{equation}
+x \frac{d^2}{dx^2}J_\nu(kx) + \frac{d}{dx}J_\nu(kx) + (k^2x - \nu^2/x) J_\nu(kx) = 0.
+\end{equation}
+也可以看做$Lu + \lambda \omega(x) u = 0$形式，
+\begin{equation}
+L = x \frac{d^2}{dx^2} + \frac{d}{dx} - \nu^2/x, ~~ \lambda = k^2, \omega(x) = x,
+\end{equation}
+取$k^\nu_i = \alpha_{\nu i} / a$,其中$\alpha_{\nu i}$为$J_\nu(x)$的第$i$个{\bf 正}零点，$i=1,2,\cdots$，即 $J_\nu (k^\nu_i a) = J_\nu (\alpha_{\nu i}) = 0$。
+则有
+\begin{equation}
+x [ J_\nu(k^\nu_i x) \frac{d}{dx} J_\nu(k^\nu_j x) - \frac{d}{dx}J_\nu(k^\nu_i x) J_\nu(k^\nu_j x) ]|^a_0 = 0.
+\end{equation}
+根据斯图姆刘维尔理论，$i \neq j$时，有
+\begin{equation}
+\int^a_0 x J_\nu(k^\nu_i x) J_\nu(k^\nu_j x) dx = 0. 
+\end{equation}
+\end{frame}
+
+\begin{frame}{$J_\nu(k^\nu_i x)$的模方}
+我们可以另设$J_\nu(\xi x)$，$\xi$为$k_i$的小邻域内的实数，$\xi \in (k^\nu_i - \delta, k^\nu_i + \delta)$，根据贝塞尔方程有
+\begin{eqnarray}
+&& \frac{d}{dx}[x \frac{d}{dx} J_\nu(k^\nu_i x)] + [(k^\nu_i)^2 x - \frac{\nu^2}{x}] J_\nu(k^\nu_i x) = 0, \\
+&& \frac{d}{dx}[x \frac{d}{dx} J_\nu(\xi x)] + (\xi^2 x - \frac{\nu^2}{x}) J_\nu(\xi x) = 0.
+\end{eqnarray}
+第一式乘以$J_\nu(\xi x)$，第二式乘以$J_\nu(k^\nu_i x)$，然后相减，在$[0,a]$上积分，得到
+\begin{eqnarray}
+&&((k^\nu_i)^2 - \xi^2) \int^a_0 x J_\nu(k^\nu_i x) J_\nu(\xi x) dx
+\nonumber\\
+&=& [ \xi x J_\nu(k^\nu_i x) \frac{d}{dx}J_\nu(\xi x) - k^\nu_i x \frac{d}{dx}J_\nu(k^\nu_i x) J_\nu(\xi x) ] |^a_0 
+\nonumber\\
+&=& - k^\nu_i a \frac{d}{dx}J_\nu( k^\nu_i a ) J_\nu( \xi a).
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{$J_\nu(k^\nu_i x)$的模方}
+所以，如果取极限$\xi \rightarrow k^\nu_i$，则有
+\begin{eqnarray}
+\int^a_0 x J^2_\nu(k^\nu_i x) dx
+&=& \lim\limits_{\xi \rightarrow k^\nu_i} \int^a_0 x J_\nu(k^\nu_i x) J_\nu(\xi x) dx
+\nonumber\\
+&=& \lim\limits_{\xi \rightarrow k^\nu_i}　\frac{- k^\nu_i aJ'_\nu(k^\nu_ia) J_\nu(\xi a)}{(k^\nu_i)^2 - \xi^2}
+\nonumber\\
+&=& \frac{ -k^\nu_i a^2 [ J'_\nu(k^\nu_i a )]^2 }{ - 2 k^\nu_i }
+{\text{(洛必达法则)}}
+\nonumber\\
+&=& \frac{a^2}{2} [ J'_\nu(k^\nu_i a )]^2.
+\end{eqnarray}
+
+根据递推公式$ - \nu J_\nu + x J'_\nu = -x J_{\nu+1}$，以及$J_\nu(k^\nu_i a) = 0$，有
+\begin{equation}
+J'_\nu(k^\nu_i a) = - J_{\nu+1}(k^\nu_i a).
+\end{equation}
+所以，最终的最终，我们得到了$J_\nu(k^\nu_i x)$的模方
+\begin{equation}
+\int^a_0 x J^2_\nu( \alpha_{\nu n} x / a) dx = \frac{a^2}{2} [ J_{\nu+1}( \alpha_{\nu i}) ]^2.
+\end{equation}
+\end{frame}
+
+\begin{frame}{正交归一性}
+
+总结正交性、模方，得到:
+\begin{equation}
+\int^a_0 x J_\nu( k^\nu_i x )　J_\nu( k^\nu_j x ) dx = \delta_{ij} \frac{a^2}{2} [ J_{\nu+1}( \alpha_{\nu i}) ]^2.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{展开定理的叙述(完备性未给出证明)}
+设函数$f(r)$在区间$(0,a)$内有连续的一阶导数和分段连续的二阶导数，且$f(r)$在$r=0$处有界，在$r=a$处为零，则$f(r)$在$(0,a)$上可以展开为绝对且一致收敛的级数
+\begin{eqnarray}
+f(r) &=& \sum^\infty_{i=1} c_{\nu i} J_\nu ( k^\nu_i r), 
+\end{eqnarray}
+展开系数$c_{\nu i}$为
+\begin{equation}
+c_{\nu i} = \frac{2}{a^2 [J_{\nu +1}(\alpha_{\nu i})]^2}
+\int^a_0 f(\rho) J_\nu( k^\nu_i \rho ) \rho d \rho.
+\end{equation}
+\end{frame}
+
+\begin{frame}{圆膜振动问题}
+固定边界的圆膜振动问题：
+\begin{equation}
+\left\{
+\begin{aligned}
+& u_{tt} = a^2( u_{xx} + u_{yy} ) ( 0 \leq x^2 + y^2 < l^2, t>0 ), \\
+& u|_{x^2 + y^2 + l^2} = 0 ( t \geq 0), \\
+& u(x,y,0) = \varphi(x,y), u_l(x,y,0) = \psi(x,y), ( 0 \leq x^2 + y^2 \leq l^2 ).
+\end{aligned}
+\right.
+\end{equation}
+做分离变量法，$u(x,y,t) = T(t) U(x,y)$，得到
+\begin{equation}
+\left\{
+\begin{aligned}
+& T'' + a^2 \lambda T = 0, \\
+& U_{xx} + U_{yy} + \lambda U = 0, \\
+& U|_{x^2 + y^2 = l^2} = 0,
+\end{aligned}
+\right.
+\end{equation}
+其中$\lambda$为待定常数。在$x-y$平面上取极坐标$(r,\phi)$，则方程变为
+\begin{equation}
+\left\{
+\begin{aligned}
+& T'' + a^2 \lambda T = 0, \\
+& U_{rr} + \frac{1}{r}U_r + \frac{1}{r^2}U_{\phi \phi} + \lambda U = 0, \\
+& U|_{r=l} = 0,
+\end{aligned}
+\right.
+\end{equation}
+要满足边界条件，我们会发现$\lambda = k^2, k \in R$。
+\end{frame}
+
+\begin{frame}{圆膜振动方程}
+再令$U = \Phi(\phi) R(r)$，得到
+\begin{equation}
+\left\{
+\begin{aligned}
+& T'' + a^2 k^2 T = 0, \\
+& \Phi'' + \nu^2 \Phi = 0, \\
+& r^2 R'' + r R' + (k^2 r^2 - \nu^2 ) R = 0,\\
+& R(l) = 0.
+\end{aligned}
+\right.
+\end{equation}
+就这样，贝塞尔方程出现了。
+考虑周期性边界条件(或连续性条件)，$\nu$必为整数$\nu = n$，所以$k = \alpha_{n,i}/l, i=1,2,...$时，$J_n(kr)$在$[0,l]$上构成正交归一完备函数基。即有
+\begin{eqnarray}
+u(r,\phi, t) &=& \sum^\infty_{n=0} \sum_{\infty}^{i=1}
+[ ( A_{n,i} \cos a k^n_i t + B_{n,i} \sin a k^n_i t ) \cos n \phi 
+\nonumber\\
+&& + ( \alpha_{n,i} \cos a k^n_i t + \beta_{n,i} \sin a k^n_i t ) \sin n \phi ] J_n (k^n_i r).
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{圆膜振动方程}
+\begin{eqnarray}
+u(r,\phi, t) &=& \sum^\infty_{n=0} \sum_{\infty}^{i=1}
+[ ( A_{n,i} \cos a k^n_i t + B_{n,i} \sin a k^n_i t ) \cos n \phi 
+\nonumber\\
+&& + ( \alpha_{n,i} \cos a k^n_i t + \beta_{n,i} \sin a k^n_i t ) \sin n \phi ] J_n (k^n_i r).
+\end{eqnarray}
+代入初始条件，
+\begin{eqnarray}
+\varphi(r, \phi) &=& u(r,\phi,t=0) = \sum^\infty_{n=0} \sum^\infty_{i=1} ( A_{n,i} \cos n \phi + \alpha_{n,i} \sin n \phi ) J_n (k^n_i r),
+\\
+\psi(r, \phi) &=& u_t(r, \phi, t) |_{t=0}
+= \sum^\infty_{n=0} \sum^\infty_{i=1}
+ak^n_i ( B_{n,i} \cos n\phi + \beta_{n,i} \sin n \phi ) J_n(k^n_i r).
+\nonumber\\
+\end{eqnarray}
+$\left\{ 1, \cos \phi, \cdots, \sin \phi, \sin 2\phi, \cdots \right\}$是$[0,2\pi]$上的正交基矢，而$ \left\{ J_n(k^n_1 r), J_n(k^n_2 r), \cdots \right\} $是$[0,l]$上的正交基矢，利用这些正交性，可以得到上式中的展开系数。
+\end{frame}
+
+\begin{frame}{诺依曼函数：第二类贝塞尔函数}
+贝塞尔方程：
+\begin{equation}
+x^2 y'' + xy' + (x^2 - \nu^2) y = 0,
+\end{equation}
+在$\nu \notin Z $时，$J_\nu, J_{-\nu}$构成两个线性无关解，所以通解为$ C_1 J_\nu + C_2 J_{-\nu}$。
+
+但是在$\nu \in Z$，即$\nu = n$时，有
+\begin{equation}
+J_{-n}(x) = (-1)^n J_n (x),
+\end{equation}
+所以$J_{-n}$与$J_n$线性相关，需要构造另一个线性无关解，才能写出$n$阶贝塞尔方程的通解。
+\end{frame}
+
+\begin{frame}{诺依曼函数：第二类贝塞尔函数}
+定义诺依曼函数
+\begin{equation}
+Y_\nu (x) = \frac{ \cos \nu \pi J_\nu (x) - J_{-\nu}(x) }{ \sin \nu \pi},
+\end{equation}
+$\nu$为整数时，分子分母都趋于0，但整体是个有限大的数
+\begin{eqnarray}
+Y_n(x) &=& \lim\limits_{\nu \rightarrow n}
+\frac{ -\pi \sin \nu \pi J_\nu + \cos \nu \pi \frac{\partial J_\nu}{\partial \nu} - \frac{\partial J_{-\nu}}{\partial \nu} }{ \pi \cos \nu \pi }
+\nonumber\\
+&=& \frac{1}{\pi}[ \frac{\partial J_\nu}{\partial \nu} - (-1)^n \frac{ \partial J_{-\nu}}{ \partial \nu } ] |_{\nu = n}
+\end{eqnarray}
+显然，$Y_{-n}(x) = (-1)^n Y_n(x)$。
+\end{frame}
+
+\begin{frame}{$Y_n$是$n$阶贝塞尔方程的解}
+
+因为$ x^2 J''_\nu + x J'_\nu + (x^2 - \nu^2) J_\nu = 0$，所以对这个公式两边求关于$\nu$的偏导数，得到
+\begin{equation}
+[ x^2 (\frac{\partial J_\nu}{\partial \nu})'' + x (\frac{\partial J_\nu}{\partial \nu})'' + (x^2 - \nu^2)(\frac{\partial J_\nu}{\partial \nu}) ]_{\nu = n} = 2n J_n,
+\end{equation}
+类似地，对$J_{-\nu}$做相似的事，得到
+\begin{equation}
+[ x^2 (\frac{\partial J_{-\nu} }{\partial \nu})'' + x (\frac{\partial J_{-\nu} }{\partial \nu})'' + (x^2 - \nu^2)(\frac{\partial J_{-\nu}}{\partial \nu}) ]_{\nu = n} = 2n J_{-n} = 2n (-1)^n J_n(x),
+\end{equation}
+利用上面两个式子，以及$Y_n(x) = \frac{1}{\pi}[ \frac{\partial J_\nu}{\partial \nu} - (-1)^n \frac{ \partial J_{-\nu}}{ \partial \nu } ] |_{\nu = n}$，得到
+\begin{equation}
+[ x^2 Y''_\nu + x Y'_\nu + (x^2 - \nu^2) Y_\nu ]|_{\nu = n} = 0,
+\end{equation}
+即$Y_n(x)$满足Bessel方程，与$J_n(x)$构成$n$阶Bessel方程的两个线性无关解。
+\end{frame}
+
+\begin{frame}{汉克尔函数}
+\begin{eqnarray}
+H^{(1)}_\nu(x) &=& J_\nu(x) + i Y_\nu(x) = \frac{1}{i\sin \nu \pi}[ J_{-\nu}(x) - e^{-i\nu\pi}J_\nu(x) ] , \\
+H^{(2)}_\nu(x) &=& J_\nu(x) - i Y_\nu(x) = \frac{1}{i\sin \nu \pi}[ e^{i\nu\pi} J_\nu(x) - J_{-\nu}(x) ].
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{球贝塞尔函数}
+在三维球坐标下，分解一些物理方程时，可能遇到
+\begin{equation}
+r^2 R'' + 2r R' + [k^2 r^2 - \nu(\nu+1)] R = 0,
+\end{equation}
+可以设$R(r) = x^{-1/2} z(x)$，则方程转化为
+\begin{equation}
+x^2 z'' + x z' + [x^2 - (\nu+\frac{1}{2})^2] z = 0,
+\end{equation}
+正是$\nu+\frac{1}{2}$阶Bessel方程，所以两个线性无关解为
+\begin{equation}
+\left\{
+\begin{aligned}
+& x^{-\frac{1}{2}} J_{\nu+\frac{1}{2}}(x), \\
+& x^{-\frac{1}{2}} Y_{\nu+\frac{1}{2}}(x),
+\end{aligned}
+\right.
+\text{或者}
+\left\{
+\begin{aligned}
+& x^{-\frac{1}{2}} H^{(1)}_{\nu+\frac{1}{2}}(x), \\
+& x^{-\frac{1}{2}} H^{(2)}_{\nu+\frac{1}{2}}(x).
+\end{aligned}
+\right.
+\end{equation}
+\end{frame}
+
+\begin{frame}{球Bessel方程}
+定义球贝塞尔函数
+\begin{eqnarray}
+j_\nu(x) &=& \sqrt{ \frac{\pi}{2x} } J_{\nu+\frac{1}{2}}(x), \\
+n_\nu(x) &=& \sqrt{ \frac{\pi}{2x} } Y_{\nu+\frac{1}{2}}(x), \\
+h^{(1)}_\nu(x) &=& \sqrt{ \frac{\pi}{2x} } H^{(1)}_{\nu+\frac{1}{2}}(x), \\
+h^{(1)}_\nu(x) &=& \sqrt{ \frac{\pi}{2x} } H^{(1)}_{\nu+\frac{1}{2}}(x).
+\end{eqnarray}
+显然有
+\begin{eqnarray}
+h^{(1)}_\nu(x) &=& j_\nu(x) + i n_\nu(x), \\
+h^{(2)}_\nu(x) &=& j_\nu(x) - i n_\nu(x), \\
+j_0(x) &=& \frac{\sin x}{x}, j_{-1}(x) = \frac{\cos x}{x}.
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{虚宗量Bessel函数}
+$\nu$阶Bessel方程：
+\begin{equation}
+x^2 y'' + x y' + (x^2 - \nu^2) y = 0,
+\end{equation}
+做替换$x \rightarrow ix$，得到
+\begin{equation}
+x^2 y'' + x y' - (x^2 + \nu^2) y = 0,
+\end{equation}
+其解为$J_\nu(ix)$，记
+\begin{equation}
+I_\nu(x) = i^{-\nu} J_\nu(ix),
+\end{equation}
+称作第一类虚宗量Bessel函数。
+上面的偏微分方程的另一个线性无关解为
+\begin{equation}
+K_\nu(x) = \frac{\pi}{2} \frac{I_{-\nu}(x) - I_\nu(x)}{\sin \nu \pi},
+\end{equation}
+称作第二类虚宗量Bessel函数。
+可以证明，
+\begin{equation}
+K_\nu(x) = \frac{\pi i^{\nu+1}}{2} H^{(1)}_\nu(ix).
+\end{equation}
+\end{frame}
+
+\begin{frame}{Bessel函数的渐进公式}
+$|x| \rightarrow \infty$时，有
+\begin{eqnarray}
+J_\nu(x) & \rightarrow & \frac{2}{\pi x} \cos( x - \frac{\nu\pi}{2} - \frac{\pi}{4}), \\
+Y_\nu(x) & \rightarrow & \frac{2}{\pi x} \sin( x - \frac{\nu\pi}{2} - \frac{\pi}{4}), \\
+H^{(1)}_\nu(x) & \rightarrow & \frac{2}{\pi x} e^{i( x - \frac{\nu\pi}{2} - \frac{\pi}{4})}, \\
+H^{(2)}_\nu(x) & \rightarrow & \frac{2}{\pi x} e^{-i( x - \frac{\nu\pi}{2} - \frac{\pi}{4})}, \\
+I_\nu(x) & \rightarrow & \frac{1}{\sqrt{2\pi x}} e^x, \\
+K_\nu(x) & \rightarrow & \frac{1}{\sqrt{2\pi x}} e^{-x}.
+\end{eqnarray}
+\end{frame}
+
+\begin{frame}{课后作业}
+
+习题　1, 2, 3, 8, 11
+
+\end{frame}
+
+\end{document}
+
+\begin{frame}{贝塞尔函数的渐进行为}
+$\nu$阶Bessel方程：
+\begin{equation}
+x^2 y'' + x y' + (x^2 - \nu^2) y = 0,
+\end{equation}
+设$y = x^{-\frac{1}{2}}z$，则可以推得
+\begin{equation}
+z'' + (1+\frac{1-4\nu^2}{4x^2}) z = 0,
+\end{equation}
+$|x| \rightarrow \infty$时，方程趋于
+\begin{equation}
+z'' + z = 0,
+\end{equation}
+即$z$趋于正弦余弦形式，
+\end{frame}

@@ -1,0 +1,278 @@
+\documentclass[11pt]{beamer}
+\usepackage[UTF8,scheme=plain]{ctex}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usetheme{Boadilla}
+
+\usepackage{framed} % 可以用 \begin{shaded}，即背景色块
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+
+\newcommand{\kong}[1][0.5]{\vspace{#1cm}}
+
+\begin{document}
+	\author{ 路毅 \hspace{0.3cm} 曲阜师范大学 }
+	\date{\number\year 年 \number\month 月 \number\day 日}
+	\title{数学物理方法第十三章}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\kaishu
+
+\begin{frame}{第十三章：拉普拉斯变换}
+\begin{itemize}
+	\item 第一节：拉普拉斯变换的定义和它的逆变换
+	\vspace{1cm}
+	\item 第二节：拉普拉斯变换的性质和应用
+\end{itemize}
+\end{frame}
+
+\begin{frame}{拉普拉斯变换的定义}
+若函数$f(t)$满足条件(A)：
+\begin{itemize}
+\item [i] 当$t<0$时$f(t)=0$
+\item [ii] 当$t\geq 0$时，$f(t)$及$f'(t)$除去有限个第一类间断点以外处处连续。
+\item [iii] 当$t \rightarrow \infty$时，$f(t)$的增长速度不超过某个指数函数，即存在常数$M$及$\sigma_0 \geq 0$，使得
+\begin{equation}
+|f(t)| \leq M e^{\sigma_0 t}, 0<t<\infty,
+\end{equation}
+其中$\sigma_0$称为$f(t)$的增长指数。
+\end{itemize}
+这时，我们称
+\begin{equation}
+L(p) = \mathscr{L}[f(t)] = \int^\infty_0 f(t) e^{-pt} dt,
+\end{equation}
+为函数$f(t)$的拉普拉斯变换(拉氏变换)，其中$Re(p) > \sigma_0$。而称
+\begin{equation}
+f(t) = \mathscr{L}^{-1} [ L(p) ] = \frac{1}{2\pi i} \int^{\sigma + i \infty}_{\sigma - i \infty} L(p) e^{pt} dp
+\end{equation}
+为$L(p)$的拉普拉斯逆变换，其中$\sigma > \sigma_0$。
+\end{frame}
+
+\begin{frame}{例１}
+例１：拉普拉斯变换$\mathscr{L}[ 1 ] = ?$
+\begin{equation}
+\mathscr{L}[1] = \int^\infty_0 1 e^{-pt} dt = - \frac{1}{p} e^{-pt} |^\infty_0 = \frac{1}{p}.
+\end{equation}
+注：教材与课件都约定：若$t <0$，原像函数值都为0。
+%拉普拉斯逆变换$\mathscr{L}^{-1}[ \frac{1}{p} ] = ?$
+%\begin{equation}
+%\mathscr{L}^{-1}[ \frac{1}{p} ] = \frac{1}{2\pi i} %\int^{\sigma+i\infty}_{\sigma-i\infty} \frac{1}{p} e^{pt} dp = 
+%\end{equation}
+\end{frame}
+
+\begin{frame}{拉普拉斯变换的性质}
+
+\begin{itemize}
+\item [1] 它是一个线性变换
+\begin{equation}
+\mathscr{L} [ \alpha f_1 + \beta f_2 ] = \alpha \mathscr{L}[f_1] + \beta \mathscr{L}[ f_2 ],
+\end{equation}
+
+\item [2] 乘积定理
+\begin{equation}
+\mathscr{L}[f_1(t) f_2(t) ] = \frac{1}{2\pi i} \int^{\sigma + i\infty}_{\sigma - i\infty} L_1(q) L_2(p-q) dq,
+\end{equation}
+其中$\sigma > \sigma_1$，$Re(p) > \sigma_2 + \sigma$。
+
+\item [3] 原像的导数定理
+\begin{eqnarray}
+\mathscr{L}[f'(t)] &=& p \mathscr{L}[f(t)] - f(0) = p L(p) - f(0),
+\nonumber\\
+\mathscr{L}[f^{(n)}(t)] &=& p^n \mathscr{L}[f(t)] - p^{n-1} f(0) - p^{n-2} f'(0) - \cdots - f^{(n-1)}(0). \nonumber
+\end{eqnarray}
+若$f(0) = f'(0) = \cdots = f^{(n-1)}(0) = 0$，则有
+\begin{equation}
+\mathscr{L}[ f^{(n)}(t) ] = p^n \mathscr{L}[ f(t) ] = p^n L(p).
+\end{equation}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{拉普拉斯变换的性质}
+\begin{itemize}
+\item [4] 原像的积分定理
+\begin{equation}
+\mathscr{L}[ \int^t_0 f(t)dt ] = \frac{ \mathscr{L}[f(t)]}{p} = \frac{L(p)}{p}.
+\end{equation}
+\item [5] 像的导数定理
+\begin{equation}
+L^{(n)}(p) = \mathscr{L}[ (-t)^n f(t) ].
+\end{equation}
+
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{例2}
+
+由像的导数定理
+\begin{equation}
+\mathscr{L}[t] = - \mathscr{L}[ -t * 1 ] = - \frac{\mathscr{L}[1]}{dp} = \frac{1}{p^2}.
+\end{equation}
+继续下去，得到
+\begin{equation}
+\mathscr{L}[t^n] = \frac{n!}{p^{n+1}}, n=0,1,2,\cdots.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{拉普拉斯变换的性质6-8}
+\begin{itemize}
+\item [6] 像的积分定理
+\begin{equation}
+\int^\infty_p L(p) dp = \mathscr{L}[ f(t)/t ].
+\end{equation}
+
+\item [7] 相似定理
+设$a>0$，则有
+\begin{equation}
+\mathscr{L}[ f(at) ] = \frac{1}{a} L(p/a).
+\end{equation}
+
+\item [8] 位移定理：$L(p-p_0) = \mathscr{L}[ e^{p_0 t} f(t) ]$
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{例3,4}
+例3：利用位移定理，由例2得
+\begin{equation}
+\mathscr{L}[ e^{ \alpha t} ] = \mathscr{L}[ e^{ \alpha t} 1 ] = \frac{1}{p - \alpha}.
+\end{equation}
+
+例4:　利用前例结果，得到
+\begin{eqnarray}
+\mathscr{L}[ sin \omega t] &=& \mathscr{L}[ \frac{e^{i\omega t} - e^{-i\omega t} }{2i} ]
+\nonumber\\ 
+&=& \frac{1}{2i}\left\{ \mathscr{L}[e^{i\omega t}] - \mathscr{L}[e^{-i\omega t} \right\}
+\nonumber\\
+&=& \frac{1}{2i}[ \frac{1}{p-i\omega}  - \frac{1}{p+i\omega} ] = \frac{\omega}{p^2+\omega^2}.
+\end{eqnarray}
+
+\end{frame}
+
+\begin{frame}{例5}
+利用原像的导数定理，由例4有
+\begin{equation}
+\mathscr{L}[ \frac{d}{dt}\sin \omega t ] = p \mathscr{L}[ \sin \omega t ] = \frac{p \omega}{p^2 + \omega^2},
+\end{equation}
+另外有
+\begin{equation}
+\mathscr{L}[ \frac{d}{dt} \sin \omega t ] = \mathscr{L}[ \omega \cos \omega t ]
+= \omega \mathscr{L}[ \cos \omega t ], 
+\end{equation}
+得到
+\begin{equation}
+\mathscr{L}[ \cos \omega t ] = \frac{p}{p^2 + \omega^2}.
+\end{equation}
+\end{frame}
+
+\begin{frame}{拉普拉斯变换的性质9-10}
+\begin{itemize}
+\item[9] 滞后定理：设$\tau>0$，则
+\begin{equation}
+\mathscr{L}[ f(t-\tau) ] = e^{-p\tau} L(p).
+\end{equation}
+
+\item[10] 卷积定理　
+
+定义卷积：若$f_1(t), f_2(t)$都满足条件(A)，则称积分
+\begin{equation}
+\int^t_0 f_1(\tau) f_2(t-\tau) d\tau,
+\end{equation}
+为$f_1(t)$和$f_2(t)$的卷积，记为$f_1(t) * f_2(t)$，显然这个卷积函数也满足条件(A)，且有
+\begin{equation}
+f_1(t) * f_2(t) = f_2(t) * f_1(t)
+\end{equation}
+卷积定理为
+\begin{equation}
+\mathscr{L}[ f_1(t)*f_2(t) ] = \mathscr{L}[f_1(t)] \mathscr{L}[f_2(t)].
+\end{equation}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{例6}
+单位阶跃函数
+\begin{equation}
+H(t-a) = \left\{
+\begin{aligned}
+& 0  & (t<a) \\
+& 1  & (t>a).
+\end{aligned}
+\right.
+\end{equation}
+由滞后定理，可得
+\begin{equation}
+\mathscr{L}[ H(t-a) ] = \frac{ e^{-ap} }{p}.
+\end{equation}
+\end{frame}
+
+\begin{frame}{例7}
+$\delta(t)$函数的拉普拉斯变换
+\begin{equation}
+\mathscr{L}[ \delta(t) ] = 1,
+\end{equation}
+由滞后定理
+\begin{equation}
+\mathscr{L}[ \delta(t-\tau) ] = e^{-p\tau}.
+\end{equation}
+\end{frame}
+
+\begin{frame}{例8}
+求解初值问题
+\begin{equation}
+\left\{
+\begin{aligned}
+& x'(t) - x(t) = 1, \\
+& x(0) = 0.
+\end{aligned}
+\right.
+\end{equation}
+
+\end{frame}
+
+\begin{frame}{作业}
+
+
+\kong[0.5]
+课后习题：1,4,5
+
+\kong[1]
+\end{frame}
+
+
+\begin{frame}{大作业}
+
+\kong[0.5]
+选取《数学物理方法》中任一章节内容，写一份调研小论文。
+
+\kong[0.5]
+示例：
+\begin{itemize}
+\item 留数定理的历史调研
+\item 弦振动方程的达朗贝尔解
+\item 格林函数与Wronskian方法
+\item 傅里叶变换在音乐中的应用
+\item 狄利克雷问题的适定性
+\item ...
+\end{itemize}
+
+截止时间：6月15日24:00。
+
+\kong[0.5]
+
+重要的事说三遍：抄袭0分，抄袭0分，抄袭0分！
+
+\end{frame}
+
+\end{document}
+
