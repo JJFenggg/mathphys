@@ -1,0 +1,355 @@
+
+\documentclass[cn,hazy,blue,14pt,normal]{elegantnote}
+\title{数学物理方法笔记}
+
+\author{Jaden Feng\\冯杰骏}
+
+\date{}
+
+\usepackage{array}
+\usepackage{physics}
+\usepackage{esint}
+\usepackage{amsmath}
+\numberwithin{equation}{section}
+\usepackage{amssymb}
+\usepackage{wrapfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows, positioning, calc, angles, quotes}
+
+\begin{document}
+
+\maketitle
+\pagenumbering{roman}
+\setcounter{page}{1}
+\newpage
+\begin{center}
+    \Huge\textbf{{Introduction}}\\
+\end{center}~\
+数学物理方法笔记。
+\begin{flushright}
+    \begin{tabular}{c}
+        Jaden Feng\\
+        冯杰骏\\
+        \date{\today}
+    \end{tabular}
+\end{flushright}
+
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\section{复数与复变函数}
+\newpage
+\subsection{复数}
+\begin{definition}
+  虚数单位$i$
+\end{definition}
+$$i^2=-1 $$
+
+\begin{definition}
+  复数:
+\end{definition}
+$$z=x+iy$$ 
+\begin{center}
+	实部：$x=\text{Re}\,z$ \qquad 虚部：$y=\text{Im}\,z$ (没有 $i$ )
+\end{center}
+
+\begin{definition}
+	  共轭复数:
+\end{definition}
+$$\overline{z} =x-iy$$
+\begin{definition}
+	复平面：
+\end{definition}
+$x$ 轴为实数轴，$y$ 轴为虚数轴,
+在复平面内，用矢量 $\vec{O_z}$ 代表复数 $z=x+iy$​ ，
+矢量 $\vec{O_z}$ 的长度为模（绝对值）$r=|z|=\sqrt{x^2+y^2} \geqslant 0 $。\\
+\\
+几个公式：
+\begin{equation}\label{Complex_fundamental_inequality}
+	\begin{aligned}
+		|x| &\leqslant |z|, \\
+		|y| &\leqslant |z|, \\
+		|z| &\leqslant |x|+|y|, \\
+		|z_1|+|z_2| &\geqslant |z_1 \pm z_2|, \\
+		||z_1|-|z_2|| &\leqslant |z_1 \pm z_2| 
+	\end{aligned}
+\end{equation}
+
+\begin{definition}
+	幅角：
+\end{definition}
+$$\text{Arg}\ z=\theta+2k\pi , k\in\mathbb{Z}$$
+
+幅角主值（主幅角）:  $\text{arg}\ z \in (-\pi,\pi]\ or \ [0,2\pi)$\\​
+
+若 $\text{arg}\ z \in (-\pi,\pi]$ ,有:
+\begin{equation*}
+    \text{arg}\ z=
+\left \{
+    \begin{array}{lr}
+        \arctan\frac{y}{x},& x>0,\\ 
+        \frac{\pi}{2},& x=0,y>0,\\
+        \arctan\frac{y}{x}+\pi, & x<0,y\geqslant0,\\
+        \arctan\frac{y}{x}-\pi, & x<0,y<0,\\
+        -\frac{\pi}{2},& x=0,y<0.\\
+    \end{array} 
+\right.
+\end{equation*}
+\begin{note}
+就是把矢量方向转到一，四象限。
+\end{note}
+\begin{definition}
+	复数的三角形式：
+\end{definition}
+利用极坐标，复数还可以写成三角形式。
+$$
+z=x+iy=r(\cos\theta+i\,\sin\theta)
+$$
+$r=1$ 时，$z=\cos\theta+i\,\sin\theta$​ 称为单位复数
+\begin{definition}
+	复数的指数形式：
+\end{definition}
+由欧拉公式 $e^{i\theta}=\cos\theta+i\,\sin\theta$​​ :
+$$
+z=x+iy=r(\cos\theta+i\,\sin\theta)=re^{i\theta}
+$$
+$z=re^{i\theta}$ 称为指数形式
+\begin{note}
+	如何将普通形式改写为三角形式和指数形式？\\
+	只需提取公因式 $r=\sqrt{x^2+y^2}$​ 即可, 需要注意的是：$r>0$ 。
+\end{note}
+指数形式下容易验证：
+$$
+\left \{
+	\begin{array}{l}
+		z_1\,z_2=r_1r_2e^{i(\theta_1+\theta_2)},\\
+		\frac{z_1}{z_2}=\frac{r_1}{r_2}e^{i(\theta_1-\theta_2)}.
+	\end{array}
+\right .
+$$
+这表明：
+$z_1\,z_2$ 对应的矢量就是把 $z_1$ 伸缩 $|z_2|$ 倍，然后幅角加 $\theta_2$ (逆时针旋转 $\theta_2$ ) ; $\frac{z_1}{z_2}$ 同理。
+\begin{definition}
+	棣莫弗公式:
+\end{definition}
+考虑复数 $z$ 的正整数次幂 $z^n$ :
+\begin{equation}
+	z^n=r(\cos\theta+i\,\sin\theta)^n=r^ne^{in\theta}=r^n(\cos n\theta+\sin n\theta)
+\end{equation}
+
+$r=1$ 时，得到棣莫弗公式：
+\begin{equation}\label{De Moivre's formula}
+(\cos\theta+i\,\sin\theta)^n=\cos n\theta+\sin n\theta
+\end{equation}
+\begin{example}
+	计算三倍角公式
+\end{example}
+由棣莫弗公式\ref{De Moivre's formula}:
+ $$
+(\cos\theta+i\,\sin\theta)^3=\cos 3\theta+i\sin3\theta
+$$
+\indent 用二项式定理 $(a + b)^n = \sum\limits_{k=0}^{n} C_{n}^{k} a^{n-k} b^k$ 展开左边：
+
+\begin{align}
+	&\cos^3\theta+3i\cos^2\theta\sin\theta-3\cos\theta\sin^2\theta-i\sin^3\theta
+ 	\\
+	=&(\cos^3\theta-3\cos\theta\sin^2\theta)+i(3\cos^2\theta\sin\theta-\sin^3\theta)
+	\\
+	=&\cos 3\theta+i\sin3\theta
+\end{align}
+
+实部对应实部，虚部对应虚部：
+
+\begin{align}
+ 	&\cos 3\theta=\cos^3\theta-3\cos\theta\sin^2\theta=4\cos^3\theta-3\cos\theta,
+	\\
+	&\sin3\theta=3\cos^2\theta\sin\theta-\sin^3\theta=3\sin\theta-4\sin^3\theta.
+\end{align}
+
+\begin{note}
+	两式中第二个等号都用了 $\cos^2\theta+\sin^2\theta=1$
+\end{note}
+\begin{definition}
+	复数的n次方根：
+\end{definition}
+下面求复数的n次方根:
+假设 $w^n=z,\;i.e.\ w=\sqrt{z}$ ，其中 $w=\rho e^{i\varphi},z=re^{i\theta}$​ ，有：
+\begin{gather}
+	\rho^n=r,\quad n\varphi=\theta+2k\pi;\\
+\rho=\sqrt{r},\quad \varphi=\frac{\theta+2k\pi}{n}.
+\end{gather}
+所以：
+$$
+w_k=(\sqrt[n]{z})_k=\sqrt[n]{r}e^{i\frac{\theta+2k\pi}{n}}=\sqrt[n]{r}e^{i\frac{\theta}{n}}e^{i\frac{2k\pi}{n}}
+$$
+\begin{note}
+	$z_1\,z_2$ 对应的矢量就是把 $z_1$ 伸缩 $|z_2|$ 倍，然后幅角加 $\theta_2$ (逆时针旋转 $\theta_2$ ) ; $\frac{z_1}{z_2}$ 同理。
+与这句话原理相同，$e^{i\frac{2k\pi}{n}}$ 的作用效果是把 $\sqrt[n]{r}e^{i\frac{\theta}{n}}$ 的幅角加 $\frac{2k\pi}{n}$ (逆时针旋转 $\frac{2k\pi}{n}$ ) 。
+$k$ 从 $0$ 开始取，取到 $n$ 时转回原点，所以共有 $n-1$ 个根。定义 $w_0=\sqrt[n]{r}e^{i\frac{\theta}{n}}$ ，可以得到 $w_k=w_0e^{i\frac{2k\pi}{n}},\quad k\in[0,n-1]$​。\\
+实际计算中可以直接计算 $\frac{1}{n}$ 次方，但是要把被开方数的幅角写成 $\theta+2k\pi$ 的形式。
+\end{note}
+
+
+\newpage
+\section{解析函数}
+\newpage
+\subsection{解析函数的概念以及C-R条件}
+
+\begin{definition}
+	C-R条件:
+\end{definition}
+直角坐标系下，对于复变函数$f(z)=u(x,y)+iv(x,y)$。
+\begin{gather}
+	\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\qquad
+	\frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}.
+\end{gather}
+称为柯西-黎曼条件（方程）。
+\par 极坐标系下，对于复变函数$f(z)=u(r,\theta)+iv(r,\theta)$。
+\begin{gather}
+	\frac{\partial u}{\partial r}=\frac{1}{r}\frac{\partial v}{\partial \theta},\qquad
+	\frac{1}{r}\frac{\partial u}{\partial \theta}=-\frac{\partial v}{\partial r}.
+\end{gather}
+\begin{note}
+	记忆方法：$\theta$没有量纲，所以需要乘$\frac{1}{r}$让两边量纲一致。
+\end{note}
+\begin{theorem}
+	函数$f(z)=u(x,y)+iv(x,y)$在区域$D$的内点$z=x+iy$可微的充分必要条件是$u(x,y),v(x,y)$在$(x,y)$处可微且满足C-R条件。
+\end{theorem}
+\begin{proof}
+
+\end{proof}
+\textbf{必要性}：i.e. $f(z)$可微$\to u,v $可微，满足C-R条件\\
+如果$f(z)$在$D$内$z$点可微，那么
+$$
+	\Delta f(z)=f(z+\Delta z)-f(z)=f'(z)\Delta z+\rho(\Delta z)
+$$
+$\rho(\Delta z)$是$\Delta z$的高阶无穷小。i.e. $\lim\limits_{\Delta z\to0}\frac{\rho(\Delta z)}{\Delta z}=0$。\\ 
+令$f'(z)=a+ib$，则：
+\begin{align*}
+	f(z+\Delta z)-f(z)&=[(u+\Delta u)+i(v+\Delta v)]-(u+iv)\\
+	&=\Delta u + i \Delta v\\
+	f'(z)\Delta z+\rho(\Delta z)&=a+ib(\Delta x+i\Delta y)+\rho(\Delta z)\\
+	&=a\Delta x-b\Delta y+i(b\Delta x+a\Delta y)+\eta_1 + i\eta_2
+\end{align*}
+所以：
+$$
+\Delta u + i \Delta v=a\Delta x-b\Delta y+i(b\Delta x+a\Delta y)+\eta_1 + i\eta_2
+$$
+比较实部和虚部：
+\begin{gather*}
+	\Delta u=a\Delta x-b\Delta y+\eta_1,\\
+	\Delta v=b\Delta x+a\Delta y+\eta_2.
+\end{gather*}
+由二元实函数微分的定义：
+\emph{如果$f(x,y)$的自变量$x，y$在点$(x_0,y_0)$分别取得改变量$\Delta x,\Delta y$，
+如果全改变量$\Delta f=f(x_0+\Delta x,y_0+\Delta y)-f(x_0,y_0)$可以表示为两个部分之和：
+一部分是一个线性式，也就是$f(x,y)$的全微分$df=A\Delta x+ B\Delta y$，
+另一部分是$\sqrt{{\Delta x}^2+{\Delta y}^2}$的高阶无穷小。那么就说$f(x,y)$在点$(x_0,y_0)$可微。}\\
+所以$\Delta u,\Delta v$在$(x,y)$处可微。\\
+分别对这两个式子求偏导数可以得到$u_x=a=v_y$，$u_y=-b=-v_x$。这就是直角坐标系下的C-R条件。\\
+
+\par \textbf{充分性}：i.e. $u,v$可微，满足C-R条件$\to f(z)$可微\\
+要证明$f(z)$可微，就要证明$\Delta f(z)$可以表示为一个线性式和一个高阶无穷小的和。
+i.e. $\Delta f(z)=A(z)\Delta z+\rho(\Delta z)$\\
+显然:$$\Delta f(z)=\Delta u+i\Delta v$$
+又因为$u,v$可微，所以：
+(这里是由二元实函数微分的定义得到的，此定义已经在必要性的证明过程中写出。)
+\begin{gather*}
+	\Delta u=u_x\Delta x+u_y\Delta y+\eta_1(\Delta x,\Delta y),\\
+	\Delta v=v_x\Delta x+v_y\Delta y+\eta_2(\Delta x,\Delta y).
+\end{gather*}
+又因为$u,v$满足C-R条件，所以：
+\begin{gather*}
+	u_x=v_y=\alpha,\\
+	u_y=-v_x=-\beta
+\end{gather*}
+代入$\Delta f(z)$：
+\begin{align*}
+	\Delta f(z)&=\Delta u+i\Delta v\\
+	&=(u_x\Delta x+u_y\Delta y+\eta_1)+i(v_x\Delta x+v_y\Delta y+\eta_2)\\
+	&=(\alpha+i\beta)(\Delta x+i\Delta y)+\eta_1+i\eta_2\\
+	&=(\alpha+i\beta)\Delta z+\rho(\Delta z)
+\end{align*}
+回过头去看看复变函数微分的定义：一个线性式和一个高阶无穷小的和。i.e. $\Delta f(z)=A(z)\Delta z+\rho(\Delta z)$\\
+显然只要证明$\rho$是无穷小量就可以了。(关于$z$的)\\
+由公式(\ref{Complex_fundamental_inequality})的第二个式子可以得到：
+$$
+\left\lvert \frac{\rho}{\Delta z} \right\rvert=\left\lvert \frac{\eta_1+i\eta_2}{\Delta z} \right\rvert
+\leqslant\left\lvert \frac{\eta_1}{\Delta z} \right\rvert+\left\lvert \frac{\eta_2}{\Delta z} \right\rvert
+$$
+当$\Delta z \to 0$时，因为$u,v$都可微，所以不等号右边两项都等于0(还是因为定义)，
+所以$\left\lvert \frac{\rho}{\Delta z} \right\rvert=0$，i.e. $\rho$是无穷小量。\\
+综上，我们证明了$f(z)$可微。\\
+同时我们还证明了：$f'(z)=\alpha+i\beta=u_x+iv_x$。\\
+证毕。
+
+\begin{example}
+	举一个满足C-R条件，但是不可微的例子：
+	$f(z)=\sqrt{|xy|}$在$z=0$处满足C-R条件，但是不可微。
+\end{example}
+函数$f(z)=\sqrt{|xy|}=u(x,y)+iv(x,y)$。于是：\\
+\begin{gather*}
+	u_x(0,0)=\lim_{\Delta x\to0}\frac{u(\Delta x,0)-u(0,0)}{\Delta x}=\lim_{\Delta x\to0}\frac{\sqrt{|\Delta x\cdot0|}}{\Delta x}=0=v_y(0,0),\\
+	u_y(0,0)=\lim_{\Delta y\to0}\frac{u(0,\Delta y)-u(0,0)}{\Delta y}=\lim_{\Delta y\to0}\frac{\sqrt{|\Delta y\cdot0|}}{\Delta y}=0=-v_x(0,0).\\
+\end{gather*}
+满足C-R条件。但是：\\
+\begin{equation*}
+	\frac{f(\Delta z)-f(0)}{\Delta z}=\frac{\sqrt{\Delta x \cdot \Delta y}}{\Delta x+i\Delta y}
+\end{equation*}
+当沿$\Delta y=k\Delta x$趋近于0时，有：原式$=\frac{\sqrt{k}}{1+ik}$与$k$有关，所以原式不可微。
+
+\begin{definition}
+	解析点
+\end{definition}
+如果函数$\omega=f(z)$在点$z_0$的某邻域内处处可微，那么就说$z_0$是函数$\omega=f(z)$的解析点，
+或者说函数$\omega=f(z)$在点$z_0$解析。
+
+\begin{definition}
+	解析函数
+\end{definition}
+如果区域$D$内的每一点都是函数$\omega=f(z)$的解析点，那么就说函数$\omega=f(z)$在区域$D$内解析，
+或者说函数$\omega=f(z)$是区域$D$内的解析函数。
+
+\begin{definition}
+	奇点
+\end{definition}
+如果$f(z)$在$z_0$点不解析，但在$z_0$的邻域总有一点解析，那么就说$z_0$是$f(z)$的奇点。
+
+\begin{example}
+	$f(z)=e^x(\cos y+i\sin y)$在$z$平面上解析，而且$f'(z)=f(z)$
+\end{example}
+
+把原式展开可以知道：
+$$
+u(x,y)=e^x\cos y,\quad v(x,y)=e^x\sin y
+$$
+所以：
+\begin{gather*}
+	u_x=e^x\cos y,\quad u_y=-e^x\sin y\\
+	v_x=e^x\sin y,\quad v_y=e^x\cos y
+\end{gather*}
+这几个式子证明了$u，v$的偏导数存在，又因为$u，v$都连续(初等函数的组合)，所以$u，v$可微。\\
+这几个式子又满足C-R条件。所以$f(z)$在$z$平面上解析。\\
+
+\begin{example}
+	由条件：
+	$\left\{
+	\begin{aligned}
+		&u(x,y) = x^2-y^2+xy\\
+		&f(z) = -1+i
+		\end{aligned}
+	\right.$
+	求解析函数$f(z)$
+\end{example}
+
+\newpage
+\subsection{解析函数与调和函数的关系}
+
+
+\end{document}
