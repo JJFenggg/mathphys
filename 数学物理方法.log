@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.5)  21 MAR 2024 22:33
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2024.3.5)  14 APR 2024 22:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1062,7 +1062,8 @@ File: tikzlibraryquotes.code.tex 2023-01-15 v3.1.10 (3.1.10)
 )
 \@quotelevel=\count510
 \@quotereset=\count511
- (./数学物理方法.aux)
+
+No file 数学物理方法.aux.
 \openout1 = `数学物理方法.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -1087,7 +1088,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
- (d:/texlive/2023/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+(d:/texlive/2023/texmf-dist/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
 )
 Package biblatex Info: XeTeX detected.
@@ -1103,15 +1104,16 @@ No file 数学物理方法.bbl.
 Package biblatex Info: Reference section=0 on input line 19.
 Package biblatex Info: Reference segment=0 on input line 19.
 Package hyperref Info: Link coloring ON on input line 19.
-(./数学物理方法.out) (./数学物理方法.out)
 \@outlinefile=\write5
 \openout5 = `数学物理方法.out'.
+
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -1176,16 +1178,16 @@ LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 20.74pt on input line 40.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 20.74pt on input line 40.
- (./数学物理方法.toc
-LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 1.
-)
+
+No file 数学物理方法.toc.
 \tf@toc=\write6
 \openout6 = `数学物理方法.toc'.
 
- [1] [1]
+[1] [1]
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
 (Font)              scaled to size 17.28pt on input line 48.
+LaTeX Font Info:    Font shape `TU/texgyretermes(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 50.
 LaTeX Font Info:    Font shape `TU/texgyretermes(0)/m/n' will be
 (Font)              scaled to size 7.0pt on input line 59.
 
@@ -1202,6 +1204,9 @@ Missing character: There is no ​ (U+200B) in font [texgyretermes-regular.otf]/
 Missing character: There is no ​ (U+200B) in font [texgyretermes-regular.otf]/OT:script=latn;language=dflt;mapping=tex-text;!
 Missing character: There is no ​ (U+200B) in font [texgyretermes-regular.otf]/OT:script=latn;language=dflt;mapping=tex-text;!
 [3]
+
+LaTeX Warning: Reference `De Moivre's formula' on page 4 undefined on input line 153.
+
 Missing character: There is no ​ (U+200B) in font [texgyretermes-regular.otf]/OT:script=latn;language=dflt;mapping=tex-text;!
 [4]
 Missing character: There is no ​ (U+200B) in font [texgyretermes-regular.otf]/OT:script=latn;language=dflt;mapping=tex-text;!
@@ -1216,6 +1221,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 248--256
  []
 
 [8]
+
+LaTeX Warning: Reference `Complex_fundamental_inequality' on page 9 undefined on input line 281.
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 296--297
 
  []
@@ -1234,20 +1243,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 336--339
 
  []
 
-[10] [11] (./数学物理方法.aux)
-Package rerunfilecheck Info: File `数学物理方法.out' has not changed.
-(rerunfilecheck)             Checksum: 74AD931C2080D69358F2D28276D08927;560.
+[10] [11] [12] (./数学物理方法.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `数学物理方法.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `数学物理方法.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  74AD931C2080D69358F2D28276D08927;560.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                数学物理方法
+(biblatex)                and rerun LaTeX afterwards.
+
 Package logreq Info: Writing requests to '数学物理方法.run.xml'.
 \openout1 = `数学物理方法.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39570 strings out of 476683
- 826740 string characters out of 5807576
+ 39563 strings out of 476683
+ 826719 string characters out of 5807576
  1860012 words of memory out of 5000000
- 59160 multiletter control sequences out of 15000+600000
+ 59161 multiletter control sequences out of 15000+600000
  520140 words of font info for 109 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,12n,107p,675b,801s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 数学物理方法.pdf (14 pages).
+Output written on 数学物理方法.pdf (15 pages).

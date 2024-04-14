@@ -342,12 +342,63 @@ $$
 	$\left\{
 	\begin{aligned}
 		&u(x,y) = x^2-y^2+xy\\
-		&f(z) = -1+i
+		&f(i) = -1+i
 		\end{aligned}
 	\right.$
-	求解析函数$f(z)$
+	求解析函数$f(z)=u+iv$
 \end{example}
-
+因为是解析函数，所以满足C-R条件：$u_x=v_y$，$u_y=-v_x$。\\
+也就是：
+\begin{gather*}
+	2x+y=v_y,\\
+	-x+2y=v_x.
+\end{gather*}
+从上面的第一个式子可以知道：
+$$
+v=\int (2x+y)dy + v(x) = 2xy+\frac{1}{2}y^2 + \varphi(x) + C
+$$
+\textbf{这里的$\varphi(x)$是$v$里面只有$x$的项}\\
+把这个式子对$x$求导，可以得到：(这里是因为对$x$求导可以用到剩下的那个式子，所以想到的。)
+$$
+v_x=2y+\varphi'(x)=2y-x
+$$
+所以
+$$
+\varphi'(x)=-x\qquad\Rightarrow\qquad\varphi(x)=-\frac{1}{2}x^2
+$$
+所以：
+$$
+f(x,y)=x^2-y^2+xy+i(2xy+\frac{1}{2}y^2-\frac{1}{2}x^2+C)
+$$
+我们又知道，$f(i)=-1+i$，所以把$i$带进去($x=0,y=1$)：
+$$
+-1+i=-1+i(\frac12 + C) \qquad\Rightarrow\qquad C=\frac12
+$$
+所以：
+$$
+f(x,y)=x^2-y^2+xy+i(2xy+\frac{1}{2}y^2-\frac{1}{2}x^2+\frac12)
+$$
+我们希望把这个式子化成$f(z)$而不是$f(x,y)$的形式。
+这需要利用共轭复数。\\
+我们知道
+$$
+z=x+iy,\quad \overline{z}=x-iy
+$$
+经过一些很容易的变换(两式相加，两式相减)，可以得到：
+$$
+x=\frac{z+\overline{z}}{2},\quad y=\frac{z-\overline{z}}{2i}
+$$
+把这个结果带进去，可以得到：
+$$
+f(z)=(1+\frac i2)z^2+\frac i2
+$$
+\begin{note}
+	这里需要注意两点：
+	\begin{itemize}
+		\item $\varphi(x)$是$v$里面只有$x$的项
+		\item 利用共轭复数，将$f(x,y)$化成$f(z)$的形式
+	\end{itemize}
+\end{note}
 \newpage
 \subsection{解析函数与调和函数的关系}
 

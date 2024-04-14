@@ -2,4 +2,4 @@
 \contentsline {subsection}{\numberline {1.1}复数}{2}{subsection.1.1}%
 \contentsline {section}{\numberline {2}解析函数}{6}{section.2}%
 \contentsline {subsection}{\numberline {2.1}解析函数的概念以及C-R条件}{7}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}解析函数与调和函数的关系}{11}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.2}解析函数与调和函数的关系}{12}{subsection.2.2}%
