@@ -529,7 +529,7 @@ $$
 \begin{note}
 	实际上按照实数的原函数，导数的规则算就行。
 \end{note}
-\begin{example}
+\begin{example}\label{example3.1}
 试证：
 $$
 \oint_C \frac{ dz }{ (z-a)^n } = \left\{
@@ -655,6 +655,26 @@ $$
 \end{note}
 
 \begin{example}
+	设$a$是围线$C$内部一点，证明
+	$$
+	\oint_C \frac{dz}{(z-a)^n} = \left\{
+	\begin{aligned}
+	2 \pi i, n=1 \\
+	0, n \neq 1, n\in Z
+	\end{aligned}
+	\right.
+	$$
+\end{example}
+这个题和例题（\ref{example3.1}）的区别是：这个题的$C$是任意的围线，不一定是圆。\\
+根据前面给出的推论（\ref{柯西积分定理推论}），
+$$
+\oint_C \frac{dz}{(z-a)^n} = \oint_{\gamma_\rho} \frac{dz}{(z-a)^n},
+$$
+其中，$\gamma_\rho$表示以$a$为圆心，以很小的$\rho$为半径（$\gamma_\rho$全在$C$内部）的圆。
+因为$\frac{1}{(z-a)^n}$在$C$与$\gamma_\rho$之间处处解析，所以有上面的式子。\\
+接下来就和例题（\ref{example3.1}）一样了。
+
+\begin{example}\label{example3.4}
 	由积分$\oint_C \frac{\dd z}{z+2}$的值证明：
 	$$ \int_{0}^{\pi}\frac{1~+~2\cos\theta}{5~+~4\cos\theta}\dd \theta = 0 $$
 	其中$C$是单位圆周。
@@ -666,4 +686,90 @@ $$\int_{0}^{\pi}\frac{1~+~2\cos\theta}{5~+~4\cos\theta}\dd \theta$$
 $z$是一个复数，能把复数和三角函数联系起来的就是欧拉公式$e^{i\theta} = \cos\theta + i\sin\theta$，
 因为$C$是单位圆周，所以$z = e^{i\theta}$（单位圆周所以$\rho = 1$）\\
 综上，所以：
+\begin{align*}
+&\frac{-\sin\theta~+~i\cos\theta}{\cos\theta~+~i\sin\theta~+~2}~\dd \theta\\
+=~& \frac{\left(-\sin\theta~+~i\cos\theta\right)\left[(\cos\theta~+~2)~-~i\sin\theta\right]}
+{\left[(\cos\theta~+~2)~+~i\sin\theta\right]\left[(\cos\theta~+~2)~-~i\sin\theta\right]}~\dd\theta\\
+=~& \frac{-2\sin\theta~+~i\left(2\cos\theta~+~1\right)}{4\cos\theta~+~5}~\dd\theta
+\end{align*}
+因为总的积分等于零，所以虚部的积分也等于零。($\int u+iv = \int u~+~i\int v = 0+i0 = 0$)\\
+也就是:
+$$ \int_{0}^{2\pi}\frac{1~+~2\cos\theta}{5~+~4\cos\theta}\dd \theta = 0 $$
+这样还缺少一步，因为题里的上限是$\pi$，这里是$2\pi$。那么只要证明（证明了这个就能化成$2a=0 \to a=0$）。
+$$ \int_{0}^{\pi} f(\theta) \dd \theta ~=~ \int_{\pi}^{2\pi} f(\theta) \dd \theta $$
+因为被积函数在这个区域里解析，所以有
+$$\int_{0}^{\pi} f(\theta) \dd \theta ~=~ \int_{2\pi(0)}^{\pi} f(\theta) \dd \theta ~=~ -\int_{\pi}^{2\pi} f(\theta) \dd \theta$$
+只要证明
+$$\int_{\pi}^{2\pi} f(\theta) ~=~ -\int_{\pi}^{2\pi} f(\theta) \dd \theta$$
+被积函数如果是偶函数，这个式子就成立了。集中注意力观察一下，果然是。\\
+所以：
+$$ \int_{0}^{\pi}\frac{1~+~2\cos\theta}{5~+~4\cos\theta}\dd \theta = 0 $$
+
+\begin{example}
+	计算$\oint_C \frac{dz}{z^2 -1}$，其中$C$为圆周$|z|=2$。
+\end{example}
+注意到
+$$\frac{1}{z^2 -1} = \frac{1}{(z+1)(z-1)}$$
+$\frac{1}{z+1}$和例题（\ref{example3.4}）的形式差不多。
+所以把原式写成这个形式：
+$$
+\frac{1}{z^2 -1} = \frac{1}{2}( \frac{1}{z-1} - \frac{1}{z+1} ),
+$$
+结合例题（\ref{example3.4}）的结果（让$a = 1~,~a = -1$)有:
+\begin{align*}
+\oint_C \frac{\dd z}{z^2 -1} &~=~\frac{1}{2}\oint_C \frac{\dd z}{z-1} - \frac{1}{2} \oint_C \frac{\dd z}{z+1}
+\nonumber\\
+&~=~\frac{1}{2}(2\pi i) - \frac{1}{2}(2\pi i) ~~~=~~~ 0.
+\end{align*}
+
+\subsection{柯西积分公式}
+\begin{definition}
+	柯西积分公式
+\end{definition}
+区域$D$边界是$C$，$f(z)$在$D$内解析，在$\bar{D}=D+C$上连续，则有
+\begin{equation}\label{柯西积分公式}
+f(z) = \frac{1}{2\pi i} \oint_C \frac{f(\zeta)}{\zeta - z} \dd\zeta.
+\end{equation}
+\begin{proof}
+要证明这个，只需要证明
+$$\left|  \oint_C \frac{f(\zeta)}{\zeta - z} \dd\zeta - 2\pi i~f(z) \right|~\to~0$$
+取$z$为圆心，半径为$\rho$（很小）的回路$\gamma_\rho$，根据复围线的柯西积分定理，
+$$
+\oint_C \frac{f(\zeta)}{\zeta - z} \dd \zeta
+= \oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} \dd \zeta
+$$
+所以原来的式子变成
+$$\left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - 2\pi i~f(z)  \right|~\to~0$$
+根据例题（\ref{example3.4}）的结果：$2\pi i = \oint_{\gamma_\rho}\frac{1}{\zeta - z} \dd \zeta$，可以知道：
+$$
+\left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - 2\pi i~f(z)  \right| 
+= \left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - f(z)\oint_{\gamma_\rho}\frac{1}{\zeta - z} \dd \zeta  \right|
+$$
+又因为$f(z)$和积分变量$\zeta$无关，所以可以拿到积分号里面去：
+$$
+\left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - f(z)\oint_{\gamma_\rho}\frac{1}{\zeta - z} \dd \zeta  \right|
+= \left|\oint_{\gamma_\rho} \frac{f(\zeta) - f(z)}{\zeta - z} d\zeta \right| 
+$$
+因为$f(\zeta)$是连续的，所以对于任意$\varepsilon>0$，只要$\rho \to 0$（充分小），就有：
+$$ \left | f(\zeta)-f(z) \right | < \varepsilon $$
+又因为$|\int_C f(z) dz | \leqslant \int_C |f(z)| |dz| \leqslant \int_C |M| |dz|$，$M$是$f(z)$的上界。\\
+这里的$M = \frac \varepsilon \rho$（$\zeta - z = \rho$（半径）\\
+所以：
+$$ \left|\oint_{\gamma_\rho} \frac{f(\zeta) - f(z)}{\zeta - z} d\zeta \right| < \frac \varepsilon \rho 2\pi \rho = 2 \pi \varepsilon $$
+也就是：
+$$ \left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - 2\pi i~f(z)  \right| < 2\pi\varepsilon \to 0$$
+所以
+$$\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta = 2\pi i~f(z)$$
+i.e.
+$$ f(z) = \frac{1}{2\pi i} \oint_C \frac{f(\zeta)}{\zeta - z} \dd\zeta.$$
+这个形式
+$ \left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - 2\pi i~f(z)  \right| < 2\pi\varepsilon \to 0$
+如果觉得不太好看，在$ \left | f(\zeta)-f(z) \right | < \varepsilon $这一步把$\varepsilon$换成$\frac{\varepsilon}{2\pi}$，最终就是小于$\varepsilon$了。
+\\为什么可以换？\\
+因为这个$\varepsilon$是任意的，可以随便取。也就是说$\varepsilon \Leftrightarrow \frac{\varepsilon}{2\pi}$，他们都是无穷小量。\\
+为什么证明了$\rho$充分时就证明了这个公式呢？\\因为我们利用柯西积分定理推论（\ref{柯西积分定理推论}）得到的式子对于任意的$\rho$都成立，
+所以任意的$\rho$都可以从我们最后得到的结果反向推回去。
+换句话说，对于任意的$\rho$，我们的逻辑链条都是成立的（无论从前往后还是从后往前），所以我们挑一个好证的$\rho$来进行下一步。
+\end{proof}
+
 \end{document}
