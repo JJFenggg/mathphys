@@ -399,8 +399,271 @@ $$
 		\item 利用共轭复数，将$f(x,y)$化成$f(z)$的形式
 	\end{itemize}
 \end{note}
-\newpage
+
 \subsection{解析函数与调和函数的关系}
+\begin{definition}
+	调和函数
+\end{definition}
+若实函数$H(x,y)$在区域$D$内有二阶偏导数且
+$$
+(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2})H = 0,
+$$
+则称$H(x,y)$为$D$内的调和函数。\\
+这个式子称作拉普拉斯方程。
+\begin{definition}
+	共轭调和函数
+\end{definition}
+若$D$内两个调和函数$u,v$满足C-R条件，则称它们为共轭调和函数。
 
+\subsection{初等解析函数}
+\begin{definition}
+	复数域上的三角函数
+\end{definition}
 
+\begin{align}
+	\cos z &= \frac{e^{iz} + e^{-iz}}{2}, \\
+	\sin z &= \frac{e^{iz} - e^{-iz}}{2i},
+\end{align}
+
+\begin{definition}
+	复数域上的双曲函数
+\end{definition}
+
+\begin{align}
+	\sinh z &= \frac{e^z - e^{-z}}{2}, \\
+	\cosh z &= \frac{e^z + e^{-z}}{2}.
+\end{align}
+
+\begin{definition}
+	复数域上的根式函数
+\end{definition}
+
+$$
+\omega = z^{1/n},
+$$
+
+记 $\omega = \rho e^{i\varphi}, z = re^{i\theta}$，可以推出
+\begin{align*}
+	\rho &= r^{1/n}, \\
+\varphi &= \frac{\theta}{n} + k \frac{2\pi}{n}, k \in Z,
+\end{align*}
+即
+$$
+\omega = r^{1/n} e^{i (\frac{\theta}{n} + k \frac{2\pi}{n}) }, ~~ k = 0, 1, \cdots, n-1
+$$
+$k$ 的 $n$ 个取值定义了 $\omega = f(z)$ 的 $n$个单值分支。每一支的俯角都相差$\frac{2\pi}{n}$。
+$$
+\omega_k = (z^{1/n})_k = r^{1/n} e^{i\frac{\theta + 2k\pi}{n}}, ~~ k = 0,1,\cdots,n-1
+$$
+
+\begin{definition}
+	复数域上的对数函数
+\end{definition}
+
+(以$e$为底的)对数函数是$e$指数的反函数
+$$
+z = e^\omega \Rightarrow \omega = Ln z,
+$$
+可得
+$$
+Ln z = \ln(re^{i(\theta + 2k\pi)}) = \ln r + i(\theta + 2k\pi), k = 0, \pm 1, \pm 2, \cdots
+$$
+主值支：
+$$
+\ln z = \ln r + i arg z,
+$$
+其中 $arg z$ 为 $z$ 的辐角主值，区间可定义为 $(-\pi, \pi]$ 或者 $[0,2\pi)$。
+
+\begin{example}
+	解方程$e^z = 1 + i \sqrt{3}$
+\end{example}
+因为$z = x + iy$,所以$e^z = e^x e^{iy}$。\\
+又因为
+$$
+e^iy = \cos y + i \sin y,
+$$
+所以:
+$$
+e^z = e^x \cos y + i e^x \sin y = 1 + i \sqrt{3}
+$$
+实部对应实部，虚部对应虚部。
+$$
+\left \{
+\begin{aligned}
+	e^x \cos y &= 1, \\
+	e^x \sin y &= \sqrt{3}.
+\end{aligned}
+\right.
+$$
+解这个方程组就能知道
+$$
+\left \{
+\begin{aligned}
+	x &= \ln 2, \\
+	y &= \frac{\pi}{3} + 2k\pi, k \in Z.
+\end{aligned}
+\right.
+\qquad \Rightarrow \qquad z = \ln 2 + i(\frac{\pi}{3} + 2k\pi), k \in Z.
+$$
+
+\newpage
+\section{柯西定理，柯西积分}
+\newpage
+\subsection{复积分定义}
+\begin{definition}
+	复变积分
+\end{definition}
+
+$C$为起点$z_0$、终点$z_n$之间的有向曲线，$\Delta z_k = z_k - z_{k-1}$\\
+定义$C$上的复变积分
+$$
+\int_c f(z) \dd z = \lim_{\Delta z_1, \Delta z_2, \cdots, \Delta z_n \rightarrow 0} \sum^n_{k=1} f(\zeta_k) \Delta z_k,
+$$
+其中 $\zeta_k$ 为 $z_{k-1}$ 到 $z_k$ 的弧段上任意一点。
+
+\begin{definition}
+	围线
+\end{definition}
+
+如果 $C$ 是逐段光滑的闭曲线，则称作是围线。
+\begin{note}
+	实际上按照实数的原函数，导数的规则算就行。
+\end{note}
+\begin{example}
+试证：
+$$
+\oint_C \frac{ dz }{ (z-a)^n } = \left\{
+\begin{aligned}
+& 2\pi i, & n=1 \\
+& 0, & n\neq 1, n\in Z
+\end{aligned}
+\right.
+$$
+其中 $C$ 表示以 $a$ 为中心，$\rho$ 为半径的圆周。
+\end{example}
+
+因为 $C$ 表示以 $a$ 为中心，$\rho$ 为半径的圆周，所以在 $C$ 上的复数可以表示为
+$$
+z = a+\rho e^{it}, ~~~ t \in [0,2\pi].
+$$
+取微分，则有
+$$
+dz = d(a+\rho e^{it}) = i\rho e^{it} dt,
+$$
+$n=1$ 时，有
+$$
+\oint_C \frac{dz}{z-a} = \int^{2\pi}_0 \frac{ i\rho e^{it} dt}{\rho e^{it}} = \int^{2\pi}_0 idt = 2\pi i,
+$$
+$n\neq 1$，且 $n\in Z$ 时，
+$$
+\oint_C \frac{dz}{(z-a)^n} = \int^{2\pi}_0 \frac{ i\rho e^{it} dt}{(\rho e^{it})^n} = i \rho^{1-n} \int^{2\pi}_0 e^{i(1-n)t}dt,
+$$
+再把这个式子积分号里面用欧拉公式展开：
+$$
+\begin{aligned}
+	\oint_C \frac{dz}{(z-a)^n} &= i \rho^{1-n} \left[ \int^{2\pi}_0 \cos[(1-n)t] dt + \int^{2\pi}_0 \sin[(1-n)t] dt\right]\\
+	\Rightarrow \qquad \oint_C \frac{dz}{(z-a)^n} &= 0
+\end{aligned}
+$$
+复积分的简单性质(积分估值用到这个):
+\begin{itemize}
+	\item $|\int_C f(z) dz | \leq \int_C |f(z)| |dz|$
+	\item $|\int_C f(z) dz | \leq Ml$，其中 $M$ 是 $|f(z)|$ 在 $C$ 上的上界，$l$ 为 $C$ 的长度。
+\end{itemize}
+
+\begin{example}
+	证明：\\
+	$\left | \int_{-i}^{i}  \left(x^2 + iy^2\right)\dd z \right | \leqslant \pi $，积分路径是从$-i$到$i$的右半圆周。
+\end{example}	
+我们知道$|\int_C f(z) dz | \leqslant \int_C |f(z)| |dz|$，所以只要证明$\int_C |f(z)| |dz| \leqslant \pi$。
+也就是证明：$$|f(z)| = |x^2 + iy^2| = x^2 + y^2 \leqslant 1$$
+在这个右半圆周上面，有$x^2 + y^2 = 1$,这就证明了。
+\begin{note}
+	这里要注意是$f(z)$的\textbf{绝对值}，$x^2 + y^2$，而不是$x^2 + iy^2$。这样就很容易想明白了。
+\end{note}
+\subsection{柯西积分定理}
+\begin{definition}\label{柯西积分定理}
+	柯西积分定理
+\end{definition}
+如果$f(z)$在单连通域$D$内解析，$C$是$D$内任意围线，则
+$$ \oint_C f(z) \dd z = 0 $$
+如果$f(z)$在边界上也连续，那么这个式子还是成立。
+
+\begin{definition}
+	不定积分
+\end{definition}
+如果$f(z)$的单连通区域$D$内解析，则
+$$
+F(z) = \int^z_{z_0} f(\zeta) d\zeta
+$$
+只与起点$z_0$和终点$z$有关，与路径无关（通过柯西积分公式可以很容易证明）。所以选定$z_0$以后，$F(z)$ 就是关于 $z$ 的函数。其导数为
+$$
+F^\prime(z) = f(z),
+$$
+所以$F(z)$称为$f(z)$的不定积分，或原函数。
+\begin{note}
+	1.这里的\textbf{不定}是\textbf{不定路径}的意思\\
+	2.与路径无关的证明：画两条不同的路径，这两个路径连成一个围线，在围线上的积分是零，$A + (-B) = 0 \Rightarrow A = B$。
+\end{note}
+
+\begin{definition}
+	复围线上的柯西积分定理
+\end{definition}
+
+\begin{wrapfigure}[8]{r}{0.3\textwidth}
+	\includegraphics[width=0.3\textwidth]{./image/复围线柯西积分定理.png}
+\end{wrapfigure}
+
+如图所示，区域里面有外点，所以这是一个复连通域。把外点绕起来，然后每个圈圈连起来，就变成了如图所示的样子。
+这些连起来的部分构成了 2 个单连通区域 $C_{up}, C_{down}$。根据简单围线上的柯西定理有
+\begin{align*}
+&\oint_{C_{up}} f(z) dz = 0, ~~~ \oint_{C_{down}} f(z) dz = 0. 
+\\\Rightarrow ~~~ &\oint_{C_{up}} f(z) dz + \oint_{C_{down}} f(z) dz = 0.
+\end{align*}
+在极限情况下，辅助线抵消，得到
+$$
+C_{up} + C_{down} = C_0 + C_1 + C_2 + C_3,
+$$
+所以有
+\begin{align*}
+&\oint_{C_0} f(z) dz + \oint_{C_1} f(z) dz + \oint_{C_2} f(z)dz + \oint_{C_3} f(z) dz \\
+=&\oint_{C_{up}} f(z) dz + \oint_{C_{down}} f(z) dz ~~~=~~~  0.
+\end{align*}
+因此，\textbf{解析函数在复围线上的积分为零。}即柯西积分定理在复围线上成立。
+
+\begin{theorem}\label{柯西积分定理推论}
+	柯西积分定理推论
+\end{theorem}
+
+\begin{wrapfigure}[5]{r}{0.25\textwidth}
+	\begin{center}
+		\includegraphics[width=0.25\textwidth]{./image/柯西积分定理推论.png}
+	\end{center}
+\end{wrapfigure}
+若$f(z)$在$C_1$之内,$C_2,C_3,C_4$之外的区域解析，\\
+根据复围线上的柯西积分定理，有
+$$
+\oint_{C_1} f(z) dz + \oint_{C^-_2} f(z) dz + \oint_{C^-_3} f(z) dz + \oint_{C^-_4} f(z) dz = 0,
+$$
+所以有
+$$
+\oint_{C_1}f(z) dz = \oint_{C_2}f(z)dz + \oint_{C_3}f(z) dz + \oint_{C_4} f(z) dz.
+$$
+\begin{note}
+	这个的意思就是一个围线的积分等于这个围线里面所以圈圈的积分加起来。\\
+	\textbf{要注意：}所有的圈圈都是同方向的，里面的圈圈要包围着奇点。
+\end{note}
+
+\begin{example}
+	由积分$\oint_C \frac{\dd z}{z+2}$的值证明：
+	$$ \int_{0}^{\pi}\frac{1~+~2\cos\theta}{5~+~4\cos\theta}\dd \theta = 0 $$
+	其中$C$是单位圆周。
+\end{example}
+看到这个式子是一个积分等于零，还是一个围线积分，这很容易想到用柯西积分定理。\\
+$\frac{\dd z}{z+2}$在单位圆内没有奇点，所以$\oint_C \frac{\dd z}{z+2} = 0$。\\
+如果能把这个式子化成下面的形式就好了
+$$\int_{0}^{\pi}\frac{1~+~2\cos\theta}{5~+~4\cos\theta}\dd \theta$$
+$z$是一个复数，能把复数和三角函数联系起来的就是欧拉公式$e^{i\theta} = \cos\theta + i\sin\theta$，
+因为$C$是单位圆周，所以$z = e^{i\theta}$（单位圆周所以$\rho = 1$）\\
+综上，所以：
 \end{document}
