@@ -772,4 +772,61 @@ $ \left|\oint_{\gamma_\rho} \frac{f(\zeta)}{\zeta - z} d\zeta - 2\pi i~f(z)  \ri
 换句话说，对于任意的$\rho$，我们的逻辑链条都是成立的（无论从前往后还是从后往前），所以我们挑一个好证的$\rho$来进行下一步。
 \end{proof}
 
+\subsection{解析函数的无限次可微性（柯西求导公式）}
+\begin{definition}
+	柯西求导公式
+\end{definition}
+$$
+f(z) = \frac{1}{2\pi i} \oint_C \frac{f(\zeta)}{\zeta - z} d \zeta, z \in D，
+$$
+易得
+\begin{equation}\label{柯西求导公式}
+f^{(n)}(z) = \frac{n!}{2\pi i} \oint_C \frac{f(\zeta)}{(\zeta - z)^{n+1}} d\zeta, z \in D, n=1,2,\cdots
+\end{equation}
+也可以写作
+$$
+\oint_C \frac{f(z)}{(z-a)^n} dz
+= \frac{2\pi i}{(n-1)!} f^{(n-1)} (a), a\in D, n=1,2,\cdots
+$$
+所以，只要$f(z)$在围线$C$上连续，在$C$内解析，则$f(z)$在$C$内任一点都有任意阶导数，任意阶导数值都可由上式计算，即用$C$上的函数值表达。
+
+\begin{example}
+	计算积分：
+$$
+I = \oint_C \frac{e^z}{(z^2+1)^2} dz,
+$$
+其中$C$是由$|z|=a,a>1$确定的区域。
+\end{example}
+构造复围线，由$C，C_1,C_2$构成，其中，$C_1$为绕$z=i$点的小圆环，$C_2$为绕$z=-i$点的小圆环。根据复围线的柯西积分定理，
+\begin{align*}
+I &=~ \oint_C \frac{e^z}{(z^2+1)^2} dz = \oint_{C_1} \frac{e^z}{(z^2+1)^2} dz + \oint_{C_2} \frac{e^z}{(z^2+1)^2} dz, \nonumber\\
+&=~ \oint_{C_1} \frac{e^z/(z+i)^2}{(z-i)^2} dz + \oint_{C_2} \frac{e^z/(z-i)^2}{(z+i)^2} dz, \nonumber\\
+&=~ 2 \pi i [e^z/(z+i)^2]'|_{z=i} + 2\pi i[e^z/(z-i)^2]'|_{z=-i},
+\end{align*}
+最后一个等号使用了(32)式。所以，经过计算得到
+$$
+I = \frac{\pi}{2}(1-i)e^i + \frac{\pi }{2}(-1-i)e^{-i}
+= i\pi \sqrt{2}\sin(1-\pi/4).
+$$
+\begin{note}
+	为什么要把这个复围线弄成两个小的复围线？\\
+	因为弄成这样之后里面的$f(Z)$才是解析的，才能应用柯西求导公式
+\end{note}
+
+\begin{example}
+	证明：
+	$$ \frac{z^n}{n!} = \frac{1}{2\pi i}\oint_C \frac{e^{z\zeta}}{\zeta^n}\frac{\dd \zeta}{\zeta} $$，
+	其中$C$是围绕原点的一条简单闭曲线。
+\end{example}
+两边同时乘以$z^n$并把$n!$移到右边：
+$$ \left(z^n\right)^2 = \frac{n!}{2\pi i}\oint_C \frac{z^n e^{ z\zeta}}{\zeta^n}\frac{\dd \zeta}{\zeta} $$
+根据柯西求导公式（\ref{柯西求导公式}）可以知道，如果$\left(z^n\right)^2 = f^{(n)}(0)$就好了（$ f(z) = z^n e^{ z\zeta} $在题中情况下解析）。\\
+求导发现果然一样。所以证明了。
+\begin{note}
+	做的时候困惑住的一点是最后一步求导没求对，$z^n$这一部分求$n$阶导数之后是零，然后就只剩下对$e$指数求导的那一项，然后呢，求$n$阶导数出来$n$个$z$，也就是$z^n$。
+\end{note}
+
+
+
+
 \end{document}
