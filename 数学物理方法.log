@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.4.18)  22 APR 2024 22:57
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.4.18)  23 APR 2024 23:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1251,7 +1251,7 @@ Overfull \hbox (44.84242pt too wide) in paragraph at lines 764--773
 [22]
 Missing character: There is no ， ("FF0C) in font cmr12!
 Missing character: There is no ， ("FF0C) in font cmr12!
-[23] [24] (./数学物理方法.aux)
+[23] [24] [25] [26] [27] [28] (./数学物理方法.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2022/08/05>
@@ -1261,18 +1261,18 @@ L3 programming layer <2022/08/05>
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `数学物理方法.out' has not changed.
-(rerunfilecheck)             Checksum: 61683212E6F23809D71DD9EF785A83A9;1298.
+(rerunfilecheck)             Checksum: EC68D310091210E6DADCC0FC67592F0A;1610.
 Package logreq Info: Writing requests to '数学物理方法.run.xml'.
 \openout1 = `数学物理方法.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 39603 strings out of 474773
- 828917 string characters out of 5761289
+ 39622 strings out of 474773
+ 829682 string characters out of 5761289
  1936842 words of memory out of 5000000
- 61103 multiletter control sequences out of 15000+600000
- 565922 words of font info for 113 fonts, out of 8000000 for 9000
+ 61120 multiletter control sequences out of 15000+600000
+ 565938 words of font info for 115 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  103i,13n,108p,675b,803s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on 数学物理方法.pdf (27 pages).
+Output written on 数学物理方法.pdf (31 pages).
